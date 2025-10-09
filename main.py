@@ -23,7 +23,7 @@ def main():
             nuovo_responsabile = input("Inserisci il nuovo responsabile: ")
             autonoleggio.imposta_responsabile(nuovo_responsabile)
 
-
+            print(autonoleggio)
 
 
         elif scelta == "2":
@@ -31,9 +31,12 @@ def main():
                 try:
                     file_path = input("Inserisci il path del file da caricare: ").strip()
                     autonoleggio.carica_file_automobili(file_path)
+                    for auto in autonoleggio.lista_auto:
+                        print(auto)
                     break
                 except Exception as e:
                     print(e)
+
 
         elif scelta == "3":
             marca = input("Marca: ")
@@ -61,6 +64,7 @@ def main():
                 print(f"Noleggio andato a buon fine: {noleggio}")
             except Exception as e:
                 print(e)
+
 
         elif scelta == "6":
             id_noleggio = input("ID noleggio da terminare: ")

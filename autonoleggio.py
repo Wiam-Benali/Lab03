@@ -86,9 +86,8 @@ class Autonoleggio:
                     self.noleggi.append(noleggio)
                     return noleggio
 
-        if not trovato:
-            raise exception()
-
+            if not trovato:
+                raise Exception("Automobile già noleggiata.")
 
 
 
@@ -97,7 +96,7 @@ class Autonoleggio:
         trovato = False
         while not trovato:
             for noleggio in self.noleggi:
-                if noleggio[id_noleggio].lower() == id_noleggio.strip().lower():
+                if noleggio['id_noleggio'].lower() == id_noleggio.strip().lower():
                     trovato = True
                     self.noleggi.remove(noleggio)
 
@@ -105,8 +104,8 @@ class Autonoleggio:
                         if auto.id.lower() == noleggio['id_auto'].lower():
                             auto.noleggiata = False
 
-        if not trovato:
-            raise  exception()
+            if not trovato:
+                raise Exception('Noleggio insesistente')
 
 
 
