@@ -31,8 +31,6 @@ def main():
                 try:
                     file_path = input("Inserisci il path del file da caricare: ").strip()
                     autonoleggio.carica_file_automobili(file_path)
-                    for auto in autonoleggio.lista_auto:
-                        print(auto)
                     break
                 except Exception as e:
                     print(e)

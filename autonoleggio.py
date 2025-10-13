@@ -1,5 +1,5 @@
 import csv
-from operator import itemgetter
+from operator import attrgetter
 from sys import exception
 
 
@@ -41,6 +41,8 @@ class Autonoleggio:
                 auto = automobile(id, marca, modello, anno, num_posti)
                 self.lista_auto.append(auto)
             input_file.close()
+            for auto in self.lista_auto:
+                print(auto)
         except FileNotFoundError:
             raise FileNotFoundError('File not found')
 
@@ -58,13 +60,8 @@ class Autonoleggio:
 
     def automobili_ordinate_per_marca(self):
         """Ordina le automobili per marca in ordine alfabetico"""
-        auto_in_forma_list = []
-        for auto in self.lista_auto:
-            info_auto = [auto.id,auto.marca,auto.modello,auto.anno,auto.num_posti]
-            auto_in_forma_list.append(info_auto)
-        auto_in_forma_list.sort(key=itemgetter(1))
 
-        return auto_in_forma_list
+        return sorted(self.lista_auto, key=attrgetter('marca'))
 
 
 
@@ -108,7 +105,3 @@ class Autonoleggio:
 
             if not trovato:
                 raise Exception('Noleggio insesistente')
-
-
-
-
