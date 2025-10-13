@@ -1,6 +1,5 @@
 import csv
 from operator import attrgetter
-from sys import exception
 
 
 class automobile:
