@@ -15,6 +15,17 @@ class automobile:
         return f"{self.id}, {self.marca}, {self.modello}, {self.anno}, {self.num_posti}"
 
 
+class Noleggio:
+    def __init__(self,codice_noleggio,id_automobile,data,cognome_cliente):
+        self.codice_noleggio = codice_noleggio
+        self.id_automobile = id_automobile
+        self.data = data
+        self.cognome_cliente = cognome_cliente
+
+    def __str__(self):
+        return f"{self.codice_noleggio}, {self.id_automobile}, {self.data}, {self.cognome_cliente}"
+
+
 class Autonoleggio:
     def __init__(self, nome, responsabile):
         """Inizializza gli attributi e le strutture dati"""
@@ -77,10 +88,10 @@ class Autonoleggio:
                     if len(self.noleggi) == 0:
                         codice_noleggio = 'N1'
                     else:
-                        numero_progressivo = int(self.noleggi[-1]['id_noleggio'][1:])+1
+                        numero_progressivo = int(self.noleggi[-1].codice_noleggio[1:])+1
                         codice_noleggio = 'N'+ str(numero_progressivo)
 
-                    noleggio = {'id_noleggio': codice_noleggio,'id_auto': id_automobile, 'data': data,'cognome': cognome_cliente}
+                    noleggio = Noleggio(codice_noleggio,id_automobile,data,cognome_cliente)
                     self.noleggi.append(noleggio)
                     return noleggio
 
@@ -94,12 +105,12 @@ class Autonoleggio:
         trovato = False
         while not trovato:
             for noleggio in self.noleggi:
-                if noleggio['id_noleggio'].lower() == id_noleggio.strip().lower():
+                if noleggio.codice_noleggio.lower() == id_noleggio.strip().lower():
                     trovato = True
                     self.noleggi.remove(noleggio)
 
                     for auto in self.lista_auto:
-                        if auto.id.lower() == noleggio['id_auto'].lower():
+                        if auto.id.lower() == noleggio.id_automobile.lower():
                             auto.noleggiata = False
 
             if not trovato:
