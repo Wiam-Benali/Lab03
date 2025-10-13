@@ -40,6 +40,7 @@ class Autonoleggio:
                 id, marca, modello, anno, num_posti = line
                 auto = automobile(id, marca, modello, anno, num_posti)
                 self.lista_auto.append(auto)
+            input_file.close()
         except FileNotFoundError:
             raise FileNotFoundError('File not found')
 
@@ -80,7 +81,8 @@ class Autonoleggio:
                     if len(self.noleggi) == 0:
                         codice_noleggio = 'N1'
                     else:
-                        codice_noleggio = 'N'+ str(self.noleggi[-1][1:]+1)
+                        numero_progressivo = int(self.noleggi[-1]['id_noleggio'][1:])+1
+                        codice_noleggio = 'N'+ str(numero_progressivo)
 
                     noleggio = {'id_noleggio': codice_noleggio,'id_auto': id_automobile, 'data': data,'cognome': cognome_cliente}
                     self.noleggi.append(noleggio)
